@@ -1,5 +1,6 @@
 const createButton = document.querySelector(".create-button");
 const input = document.querySelector(".todo-input");
+const itemContainer = document.querySelector(".item-container");
 
 const todoItems = [];
 
@@ -11,10 +12,11 @@ const createTodoItem = () => {
 
   // 拿到todo item 物件後，放進 todoItems 陣列中
   todoItems.push(todoItem);
-  console.log(todoItems);
-};
+  // console.log(todoItems);
 
-createButton.addEventListener("click", createTodoItem);
+  // 把所有 todo items 顯示在畫面上
+  renderTodoItems();
+};
 
 const generateTodoItem = (text) => {
   const container = document.createElement("div");
@@ -36,3 +38,20 @@ const createTodoItemData = (text) => {
 
   return data;
 }
+
+const renderTodoItems = () => {
+  for (let i = 0; i < todoItems.length; i++) {
+    const todoItem = todoItems[i];
+    // console.log(todoItem);
+    // const text = todoItem.text; // 取出物件的值
+    const { text } = todoItem; // destructing 取出物件的值
+    // console.log(text);
+
+    const todoItemElement = generateTodoItem(text);
+    // console.log(todoItemElement);
+
+    itemContainer.appendChild(todoItemElement);
+  }
+}
+
+createButton.addEventListener("click", createTodoItem);
