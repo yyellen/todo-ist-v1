@@ -14,6 +14,9 @@ const createTodoItem = () => {
   todoItems.push(todoItem);
   // console.log(todoItems);
 
+  // 清空輸入框
+  clearInput();
+
   // 把所有 todo items 顯示在畫面上
   renderTodoItems();
 };
@@ -40,6 +43,8 @@ const createTodoItemData = (text) => {
 }
 
 const renderTodoItems = () => {
+  // 每一次渲染時先清空 item container
+  clearTodoItems();
   for (let i = 0; i < todoItems.length; i++) {
     const todoItem = todoItems[i];
     // console.log(todoItem);
@@ -52,6 +57,14 @@ const renderTodoItems = () => {
 
     itemContainer.appendChild(todoItemElement);
   }
+}
+
+const clearTodoItems = () => {
+  itemContainer.innerHTML = "";
+}
+
+const clearInput = () => {
+  input.value = "";
 }
 
 createButton.addEventListener("click", createTodoItem);
