@@ -25,7 +25,7 @@ const createTodoItem = () => {
   renderTodoItems();
 };
 
-const generateTodoItem = (text) => {
+const generateTodoItem = (text, deleteIndex) => {
   const container = document.createElement("div");
   container.classList.add("todo-item-container");
 
@@ -35,7 +35,24 @@ const generateTodoItem = (text) => {
 
   itemContainer.appendChild(itemText);
 
+  // 新增刪除按鈕
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("delete-button");
+  const deleteButtonText = document.createTextNode("x");
+  deleteButton.appendChild(deleteButtonText);
+
+  deleteButton.addEventListener("click", function () {
+    // delete button 要做的事情
+    // alert(`確定要刪除${text}? 此動作無法恢復`)
+    // console.log("delete todo item", deleteIndex);
+    todoItems.splice(deleteIndex, 1);
+    // console.log(todoItems);
+    renderTodoItems();
+    updateTotalCount();
+  })
+
   container.appendChild(itemContainer);
+  container.appendChild(deleteButton);
 
   return container;
 };
@@ -58,7 +75,7 @@ const renderTodoItems = () => {
     const { text } = todoItem; // destructing 取出物件的值
     // console.log(text);
 
-    const todoItemElement = generateTodoItem(text);
+    const todoItemElement = generateTodoItem(text, i);
     // console.log(todoItemElement);
 
     itemContainer.appendChild(todoItemElement);
