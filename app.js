@@ -1,6 +1,7 @@
 const createButton = document.querySelector(".create-button");
 const input = document.querySelector(".todo-input");
 const itemContainer = document.querySelector(".item-container");
+const totalCount = document.querySelector(".total-count");
 
 const todoItems = [];
 
@@ -12,7 +13,10 @@ const createTodoItem = () => {
 
   // 拿到todo item 物件後，放進 todoItems 陣列中
   todoItems.push(todoItem);
-  // console.log(todoItems);
+  console.log(todoItems);
+
+  // 更新 total count
+  updateTotalCount();
 
   // 清空輸入框
   clearInput();
@@ -29,6 +33,7 @@ const generateTodoItem = (text) => {
   const itemText = document.createTextNode(text);
 
   itemContainer.appendChild(itemText);
+
   container.appendChild(itemContainer);
 
   return container;
@@ -65,6 +70,10 @@ const clearTodoItems = () => {
 
 const clearInput = () => {
   input.value = "";
+}
+
+const updateTotalCount = () => {
+  totalCount.innerHTML = todoItems.length;
 }
 
 createButton.addEventListener("click", createTodoItem);
