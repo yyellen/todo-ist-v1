@@ -11,7 +11,7 @@ const createTodoItem = () => {
   // 透過 createTodoItemData 產生 todo item 物件
   const todoItem = createTodoItemData(inputValue);
 
-  // 拿到todo item 物件後，放進 todoItems 陣列中
+  // 拿到 todo item 物件後，放進 todoItems 陣列中
   todoItems.push(todoItem);
   console.log(todoItems);
 
@@ -30,6 +30,7 @@ const generateTodoItem = (text) => {
   container.classList.add("todo-item-container");
 
   const itemContainer = document.createElement("div");
+  itemContainer.classList.add("todo-text-container");
   const itemText = document.createTextNode(text);
 
   itemContainer.appendChild(itemText);

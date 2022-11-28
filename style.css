@@ -36,10 +36,6 @@ body {
   border: none;
 }
 
-/* ::placeholder {
-  color: red;
-} */
-
 .create-button {
   height: 40px;
   width: 40px;
@@ -77,18 +73,23 @@ body {
 .item-container {
   margin-top: 32px;
   padding: 32px;
-  border: 2px #f0f0f0 solid;
+  border: 2px solid #f0f0f0;
   border-radius: 8px;
 }
 
 .todo-item-container {
   width: 100%;
-  height: 44px;
   color: #f0f0f0;
-  border: 1px #f0f0f0 solid;
+  border: 1px solid #f0f0f0;
   border-radius: 8px;
   margin-bottom: 20px;
-  padding: 0 20px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
+}
+
+.todo-text-container {
+  width: 100%;
+  font-size: 16px;
+  word-wrap: break-word;
 }
