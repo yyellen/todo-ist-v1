@@ -1,7 +1,8 @@
 const createButton = document.querySelector(".create-button");
 const input = document.querySelector(".todo-input");
 const itemContainer = document.querySelector(".item-container");
-const totalCount = document.querySelector(".total-count");
+const totalCount = document.querySelectorAll(".total-count");
+const completedCount = document.querySelector(".completed-count");
 
 const todoItems = [];
 
@@ -13,7 +14,7 @@ const createTodoItem = () => {
 
   // 拿到 todo item 物件後，放進 todoItems 陣列中
   todoItems.push(todoItem);
-  console.log(todoItems);
+  // console.log(todoItems);
 
   // 更新 total count
   updateTotalCount();
@@ -49,8 +50,20 @@ const generateTodoItem = (text, deleteIndex) => {
     // console.log(todoItems);
     renderTodoItems();
     updateTotalCount();
-  })
+    updateCompletedCount();
+  });
 
+  // 新增 checkbox
+  const checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+
+  checkbox.addEventListener("change", function () {
+    // checkbox 要做的事情
+    itemContainer.classList.toggle("text-completed");
+    updateCompletedCount();
+  });
+
+  container.appendChild(checkbox);
   container.appendChild(itemContainer);
   container.appendChild(deleteButton);
 
@@ -59,11 +72,11 @@ const generateTodoItem = (text, deleteIndex) => {
 
 const createTodoItemData = (text) => {
   const data = {
-    text: text
+    text: text,
   };
 
   return data;
-}
+};
 
 const renderTodoItems = () => {
   // 每一次渲染時先清空 item container
@@ -80,18 +93,26 @@ const renderTodoItems = () => {
 
     itemContainer.appendChild(todoItemElement);
   }
-}
+};
 
 const clearTodoItems = () => {
   itemContainer.innerHTML = "";
-}
+};
 
 const clearInput = () => {
   input.value = "";
-}
+};
 
 const updateTotalCount = () => {
-  totalCount.innerHTML = todoItems.length;
-}
+  totalCount[0].innerHTML = totalCount[1].innerHTML = todoItems.length;
+};
+
+const updateCompletedCount = () => {
+  const checkedCount = document.querySelectorAll(
+    'input[type="checkbox"]:checked'
+  );
+  completedCount.innerHTML = checkedCount.length;
+  console.log(checkedCount.length);
+};
 
 createButton.addEventListener("click", createTodoItem);

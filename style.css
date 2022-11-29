@@ -62,12 +62,12 @@ body {
   font-size: 16px;
 }
 
-.total-count,
-.completed-count {
-  background: #000;
+/* .count {
+  color: #02132b;
+  background: #f0f0f0;
   padding: 2px 12px;
-  border-radius: 1rem; /* 膠囊狀 */
-}
+  border-radius: 1rem;
+} */
 
 .item-container {
   margin-top: 32px;
@@ -85,7 +85,7 @@ body {
   padding: 12px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .todo-item-container:first-child {
@@ -93,8 +93,8 @@ body {
 }
 
 .todo-text-container {
-  width: 90%;
-  font-size: 16px;
+  width: 80%;
+  font-size: 20px;
   word-wrap: break-word;
 }
 
@@ -102,10 +102,21 @@ body {
   width: 32px;
   height: 32px;
   font-size: 16px;
-  padding: 0;
   background: rgb(255, 98, 98);
   color: #f0f0f0;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
+}
+
+input[type="checkbox"] {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  cursor: pointer;
+}
+
+.text-completed {
+  color: #cacaca;
+  text-decoration:line-through;
 }
