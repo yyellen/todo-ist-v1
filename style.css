@@ -39,6 +39,7 @@ body {
   height: 40px;
   width: 40px;
   font-size: 32px;
+  padding: 0;
   border: 2px solid #f0f0f0;
   color: #f0f0f0;
   border-radius: 8px;
@@ -86,6 +87,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  gap: 12px;
 }
 
 .todo-item-container:first-child {
@@ -93,7 +95,7 @@ body {
 }
 
 .todo-text-container {
-  width: 80%;
+  width: 70%;
   font-size: 20px;
   word-wrap: break-word;
 }
@@ -101,11 +103,12 @@ body {
 .delete-button {
   width: 32px;
   height: 32px;
-  font-size: 16px;
-  background: rgb(255, 98, 98);
-  color: #f0f0f0;
-  border: 0;
-  border-radius: 8px;
+  font-size: 20px;
+  padding: 0;
+  background: transparent;
+  color: rgb(255, 98, 98);
+  border: 1px solid rgb(255, 98, 98);;
+  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -119,4 +122,16 @@ input[type="checkbox"] {
 .text-completed {
   color: #cacaca;
   text-decoration:line-through;
+}
+
+.edit-button {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+  padding: 0;
+  background: transparent;
+  color: #f0f0f0;
+  border: 1px solid #f0f0f0;
+  border-radius: 50%;
+  cursor: pointer;
 }

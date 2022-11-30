@@ -26,7 +26,7 @@ const createTodoItem = () => {
   renderTodoItems();
 };
 
-const generateTodoItem = (text, deleteIndex) => {
+const generateTodoItem = (text, deleteIndex, editIndex) => {
   const container = document.createElement("div");
   container.classList.add("todo-item-container");
 
@@ -36,13 +36,13 @@ const generateTodoItem = (text, deleteIndex) => {
 
   itemContainer.appendChild(itemText);
 
-  // 新增刪除按鈕
+  // 新增 delete button
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
-  const deleteButtonText = document.createTextNode("x");
+  const deleteButtonText = document.createTextNode("×");
   deleteButton.appendChild(deleteButtonText);
 
-  deleteButton.addEventListener("click", function () {
+  deleteButton.addEventListener("click", function() {
     // delete button 要做的事情
     // alert(`確定要刪除${text}? 此動作無法恢復`)
     // console.log("delete todo item", deleteIndex);
@@ -57,14 +57,36 @@ const generateTodoItem = (text, deleteIndex) => {
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
 
-  checkbox.addEventListener("change", function () {
+  checkbox.addEventListener("change", function() {
     // checkbox 要做的事情
     itemContainer.classList.toggle("text-completed");
     updateCompletedCount();
   });
 
+  // 新增 edit button
+  const editButton = document.createElement("button");
+  editButton.classList.add("edit-button");
+  const editButtonText = document.createTextNode("✎");
+  editButton.appendChild(editButtonText);
+
+  editButton.addEventListener("click", function() {
+    // edit button 要做的事
+    console.log("edit", editIndex, text);
+    // 新增 input
+    // 代入 text
+    // 編輯按鈕消失
+    // 新增確認按鈕
+    // 取代 text
+    // 重新渲染
+    // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
+    // 新增取消按鈕
+    // 取消
+    // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
+  });
+
   container.appendChild(checkbox);
   container.appendChild(itemContainer);
+  container.appendChild(editButton);
   container.appendChild(deleteButton);
 
   return container;
@@ -88,7 +110,7 @@ const renderTodoItems = () => {
     const { text } = todoItem; // destructing 取出物件的值
     // console.log(text);
 
-    const todoItemElement = generateTodoItem(text, i);
+    const todoItemElement = generateTodoItem(text, i, i);
     // console.log(todoItemElement);
 
     itemContainer.appendChild(todoItemElement);
@@ -112,7 +134,7 @@ const updateCompletedCount = () => {
     'input[type="checkbox"]:checked'
   );
   completedCount.innerHTML = checkedCount.length;
-  console.log(checkedCount.length);
+  // console.log(checkedCount.length);
 };
 
 createButton.addEventListener("click", createTodoItem);
