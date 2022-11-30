@@ -39,8 +39,7 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
   // 新增 delete button
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
-  const deleteButtonText = document.createTextNode("×");
-  deleteButton.appendChild(deleteButtonText);
+  deleteButton.innerHTML = '<i class="fa-solid fa-xmark"></i>'
 
   deleteButton.addEventListener("click", function() {
     // delete button 要做的事情
@@ -66,8 +65,7 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
   // 新增 edit button
   const editButton = document.createElement("button");
   editButton.classList.add("edit-button");
-  const editButtonText = document.createTextNode("✎");
-  editButton.appendChild(editButtonText);
+  editButton.innerHTML = '<i class="fa-solid fa-pen"></i>'
 
   editButton.addEventListener("click", function() {
     // edit button 要做的事
