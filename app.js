@@ -3,6 +3,7 @@ const input = document.querySelector(".todo-input");
 const itemContainer = document.querySelector(".item-container");
 const totalCount = document.querySelectorAll(".total-count");
 const completedCount = document.querySelector(".completed-count");
+const checkbox = document.querySelectorAll('input[type="checkbox"]');
 
 const todoItems = [];
 
@@ -26,7 +27,7 @@ const createTodoItem = () => {
   renderTodoItems();
 };
 
-const generateTodoItem = (text, deleteIndex, editIndex) => {
+const generateTodoItem = (text, deleteIndex) => {
   const container = document.createElement("div");
   container.classList.add("todo-item-container");
 
@@ -56,10 +57,19 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
 
-  checkbox.addEventListener("change", function() {
+  checkbox.addEventListener("click", function() {
     // checkbox 要做的事情
-    itemContainer.classList.toggle("text-completed");
-    updateCompletedCount();
+    // completed = true
+    const todoItem = todoItems[deleteIndex];
+    todoItem.completed =! todoItem.completed;
+    console.log(todoItems);
+    // itemContainer.classList.toggle("text-completed");
+    // if (todoItem.completed) {
+    //   itemContainer.classList.add("text-completed");
+    //   checkbox.setAttribute("checked", true);
+    // }
+    // renderTodoItems();
+    // updateCompletedCount();
   });
 
   // 新增 edit button
@@ -69,7 +79,7 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
 
   editButton.addEventListener("click", function() {
     // edit button 要做的事
-    console.log("edit", editIndex, text);
+    console.log("edit", deleteIndex, text);
     // 新增 input
     // 代入 text
     // 編輯按鈕消失
@@ -80,6 +90,7 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
     // 新增取消按鈕
     // 取消
     // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
+    renderTodoItems();
   });
 
   container.appendChild(checkbox);
@@ -93,6 +104,8 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
 const createTodoItemData = (text) => {
   const data = {
     text: text,
+    completed: false,
+    edit: false
   };
 
   return data;
@@ -107,9 +120,14 @@ const renderTodoItems = () => {
     // const text = todoItem.text; // 取出物件的值
     const { text } = todoItem; // destructing 取出物件的值
     // console.log(text);
-
-    const todoItemElement = generateTodoItem(text, i, i);
+    const todoItemElement = generateTodoItem(text, i);
     // console.log(todoItemElement);
+
+    // 完成項目
+    // if (todoItem.completed) {
+    //   itemContainer.classList.add("text-completed");
+    //   checkbox.setAttribute("checked", true);
+    // }
 
     itemContainer.appendChild(todoItemElement);
   }
@@ -127,12 +145,14 @@ const updateTotalCount = () => {
   totalCount[0].innerHTML = totalCount[1].innerHTML = todoItems.length;
 };
 
-const updateCompletedCount = () => {
-  const checkedCount = document.querySelectorAll(
-    'input[type="checkbox"]:checked'
-  );
-  completedCount.innerHTML = checkedCount.length;
-  // console.log(checkedCount.length);
+const updateCompletedCount = (todoItems) => {
+  // 計算 ture的數量
+  const checkedItems = todoItems.filter(function (todoItem) { 
+    todoItem.completed === true;
+  });
+  return checkedItems;
+  // completedCount.innerHTML = checkedItems.length;
+  // console.log(checkedItems);
 };
 
 createButton.addEventListener("click", createTodoItem);
