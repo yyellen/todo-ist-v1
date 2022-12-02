@@ -27,7 +27,7 @@ const createTodoItem = () => {
   renderTodoItems();
 };
 
-const generateTodoItem = (text, deleteIndex) => {
+const generateTodoItem = (text, index) => {
   const container = document.createElement("div");
   container.classList.add("todo-item-container");
 
@@ -45,12 +45,12 @@ const generateTodoItem = (text, deleteIndex) => {
   deleteButton.addEventListener("click", function() {
     // delete button 要做的事情
     // alert(`確定要刪除${text}? 此動作無法恢復`)
-    // console.log("delete todo item", deleteIndex);
-    todoItems.splice(deleteIndex, 1);
+    // console.log("delete todo item", index);
+    todoItems.splice(index, 1);
     // console.log(todoItems);
     renderTodoItems();
     updateTotalCount();
-    updateCompletedCount();
+    // updateCompletedCount();
   });
 
   // 新增 checkbox
@@ -59,16 +59,11 @@ const generateTodoItem = (text, deleteIndex) => {
 
   checkbox.addEventListener("click", function() {
     // checkbox 要做的事情
-    // completed = true
-    const todoItem = todoItems[deleteIndex];
+    // 使 completed = true
+    const todoItem = todoItems[index];
     todoItem.completed =! todoItem.completed;
-    console.log(todoItems);
-    // itemContainer.classList.toggle("text-completed");
-    // if (todoItem.completed) {
-    //   itemContainer.classList.add("text-completed");
-    //   checkbox.setAttribute("checked", true);
-    // }
-    // renderTodoItems();
+    // console.log(todoItems);
+    renderTodoItems();
     // updateCompletedCount();
   });
 
@@ -79,17 +74,10 @@ const generateTodoItem = (text, deleteIndex) => {
 
   editButton.addEventListener("click", function() {
     // edit button 要做的事
-    console.log("edit", deleteIndex, text);
-    // 新增 input
-    // 代入 text
-    // 編輯按鈕消失
-    // 新增確認按鈕
-    // 取代 text
-    // 重新渲染
-    // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
-    // 新增取消按鈕
-    // 取消
-    // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
+    console.log("要編輯的項目", index, text);
+    // 使 edit = true
+    const todoItem = todoItems[index];
+    todoItem.edit = true;
     renderTodoItems();
   });
 
@@ -124,10 +112,47 @@ const renderTodoItems = () => {
     // console.log(todoItemElement);
 
     // 完成項目
-    // if (todoItem.completed) {
-    //   itemContainer.classList.add("text-completed");
-    //   checkbox.setAttribute("checked", true);
-    // }
+    if (todoItem.completed) {
+      itemContainer.classList.add("text-completed");
+      // Error: Uncaught TypeError: checkbox.setAttribute is not a function
+      checkbox.setAttribute("checked", true);
+    }
+
+    // 編輯狀態
+    if (todoItem.edit) {
+      const TodoItemContainer = document.querySelector(".todo-item-container");
+      
+      // 清空 todo item container
+      // Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
+      TodoItemContainer.innerHTML = "";
+      
+      const editInput = document.createElement("input");
+      editInput.value = text;
+
+      const editConfirmButton = document.createElement("button");
+      editConfirmButton.innerText = "確認";
+
+      const editCancelButton = document.createElement("button");
+      editCancelButton.innerText = "取消";
+
+      // Error: Uncaught TypeError: Cannot read properties of null (reading 'appendChild')
+      TodoItemContainer.appendChild(editInput);
+      TodoItemContainer.appendChild(editConfirmButton);
+      TodoItemContainer.appendChild(editCancelButton);
+
+      editConfirmButton.addEventListener("click", function() {
+        todoItem.text = editInput.value;
+        console.log(todoItems);
+        todoItem.edit = false;
+        renderTodoItems();
+      })
+
+      // Error: Uncaught RangeError: Maximum call stack size exceeded
+      editConfirmButton.addEventListener("click", function () {
+        todoItem.edit = false;
+        renderTodoItems();
+      });
+    }
 
     itemContainer.appendChild(todoItemElement);
   }
@@ -146,13 +171,11 @@ const updateTotalCount = () => {
 };
 
 const updateCompletedCount = (todoItems) => {
-  // 計算 ture的數量
-  const checkedItems = todoItems.filter(function (todoItem) { 
-    todoItem.completed === true;
-  });
-  return checkedItems;
-  // completedCount.innerHTML = checkedItems.length;
-  // console.log(checkedItems);
+  // 計算 completed = true 的數量
+  // Error: Uncaught TypeError: Cannot read properties of undefined (reading 'filter')
+  const checkedItem = todoItems.filter((item) => item.completed);
+  console.log(checkedItem);
+  completedCount.innerHTML = checkedItem;
 };
 
 createButton.addEventListener("click", createTodoItem);
