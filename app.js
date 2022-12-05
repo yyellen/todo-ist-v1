@@ -3,7 +3,6 @@ const input = document.querySelector(".todo-input");
 const itemContainer = document.querySelector(".item-container");
 const totalCount = document.querySelectorAll(".total-count");
 const completedCount = document.querySelector(".completed-count");
-const checkbox = document.querySelectorAll('input[type="checkbox"]');
 
 const todoItems = [];
 
@@ -110,12 +109,11 @@ const renderTodoItems = () => {
     // console.log(text);
     const todoItemElement = generateTodoItem(text, i);
     // console.log(todoItemElement);
-
+    
     // 完成項目
     if (todoItem.completed) {
-      itemContainer.classList.add("text-completed");
-      // Error: Uncaught TypeError: checkbox.setAttribute is not a function
-      checkbox.setAttribute("checked", true);
+      todoItemElement.childNodes[1].classList.add("text-completed");
+      todoItemElement.childNodes[0].setAttribute("checked", true);
     }
 
     // 編輯狀態
