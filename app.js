@@ -124,6 +124,7 @@ const renderTodoItems = () => {
     }
 
     itemContainer.appendChild(todoItemElement);
+    updateCompletedCount();
   }
 };
 
@@ -140,11 +141,10 @@ const updateTotalCount = () => {
 };
 
 const updateCompletedCount = () => {
-  const checkedCount = document.querySelectorAll(
-    'input[type="checkbox"]:checked'
-  );
-  completedCount.innerHTML = checkedCount.length;
-  // console.log(checkedCount.length);
+  // 計算 completed = true 的數量
+  const checkedItem = todoItems.filter((item) => item.completed);
+  // console.log(checkedItem);
+  completedCount.innerHTML = checkedItem.length;
 };
 
 createButton.addEventListener("click", createTodoItem);
