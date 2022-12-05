@@ -39,7 +39,7 @@ const generateTodoItem = (text, index) => {
   // 新增 delete button
   const deleteButton = document.createElement("button");
   deleteButton.classList.add("delete-button");
-  deleteButton.innerHTML = '<i class="fa-solid fa-xmark"></i>'
+  deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>'
 
   deleteButton.addEventListener("click", function() {
     // delete button 要做的事情
@@ -108,7 +108,7 @@ const renderTodoItems = () => {
     const { text } = todoItem; // destructing 取出物件的值
     // console.log(text);
     const todoItemElement = generateTodoItem(text, i);
-    console.log(todoItemElement);
+    // console.log(todoItemElement);
     
     // 完成項目
     if (todoItem.completed) {
@@ -125,13 +125,16 @@ const renderTodoItems = () => {
       // })
       
       const editInput = document.createElement("input");
+      editInput.classList.add("edit-input");
       editInput.value = text;
 
       const editConfirmButton = document.createElement("button");
-      editConfirmButton.innerText = "確認";
+      editConfirmButton.classList.add("edit-button");
+      editConfirmButton.innerHTML = '<i class="fa-solid fa-check"></i>';
 
       const editCancelButton = document.createElement("button");
-      editCancelButton.innerText = "取消";
+      editCancelButton.classList.add("edit-button");
+      editCancelButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
 
       todoItemElement.appendChild(editInput);
       todoItemElement.appendChild(editConfirmButton);
@@ -139,7 +142,7 @@ const renderTodoItems = () => {
 
       editConfirmButton.addEventListener("click", function() {
         todoItem.text = editInput.value;
-        console.log(todoItems);
+        // console.log(todoItems);
         todoItem.edit = false;
         renderTodoItems();
       })
