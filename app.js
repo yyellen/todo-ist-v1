@@ -58,7 +58,11 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
 
   checkbox.addEventListener("change", function() {
     // checkbox 要做的事情
-    itemContainer.classList.toggle("text-completed");
+    // 使 completed = true
+    const todoItem = todoItems[index];
+    todoItem.completed =! todoItem.completed;
+    // console.log(todoItems);
+    renderTodoItems();
     updateCompletedCount();
   });
 
@@ -93,6 +97,8 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
 const createTodoItemData = (text) => {
   const data = {
     text: text,
+    completed: false,
+    edit: false
   };
 
   return data;
@@ -110,6 +116,12 @@ const renderTodoItems = () => {
 
     const todoItemElement = generateTodoItem(text, i, i);
     // console.log(todoItemElement);
+
+    // 完成項目
+    if (todoItem.completed) {
+      todoItemElement.childNodes[1].classList.add("text-completed");
+      todoItemElement.childNodes[0].setAttribute("checked", true);
+    }
 
     itemContainer.appendChild(todoItemElement);
   }
