@@ -49,7 +49,7 @@ const generateTodoItem = (text, index) => {
     // console.log(todoItems);
     renderTodoItems();
     updateTotalCount();
-    // updateCompletedCount();
+    updateCompletedCount();
   });
 
   // 新增 checkbox
@@ -63,7 +63,7 @@ const generateTodoItem = (text, index) => {
     todoItem.completed =! todoItem.completed;
     // console.log(todoItems);
     renderTodoItems();
-    // updateCompletedCount();
+    updateCompletedCount();
   });
 
   // 新增 edit button
@@ -153,6 +153,7 @@ const renderTodoItems = () => {
     }
 
     itemContainer.appendChild(todoItemElement);
+    updateCompletedCount();
   }
 };
 
@@ -168,12 +169,11 @@ const updateTotalCount = () => {
   totalCount[0].innerHTML = totalCount[1].innerHTML = todoItems.length;
 };
 
-const updateCompletedCount = (todoItems) => {
+const updateCompletedCount = () => {
   // 計算 completed = true 的數量
-  // Error: Uncaught TypeError: Cannot read properties of undefined (reading 'filter')
   const checkedItem = todoItems.filter((item) => item.completed);
-  console.log(checkedItem);
-  completedCount.innerHTML = checkedItem;
+  // console.log(checkedItem);
+  completedCount.innerHTML = checkedItem.length;
 };
 
 createButton.addEventListener("click", createTodoItem);
