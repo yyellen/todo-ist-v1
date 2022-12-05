@@ -26,7 +26,7 @@ const createTodoItem = () => {
   renderTodoItems();
 };
 
-const generateTodoItem = (text, deleteIndex, editIndex) => {
+const generateTodoItem = (text, index) => {
   const container = document.createElement("div");
   container.classList.add("todo-item-container");
 
@@ -44,8 +44,8 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
   deleteButton.addEventListener("click", function() {
     // delete button 要做的事情
     // alert(`確定要刪除${text}? 此動作無法恢復`)
-    // console.log("delete todo item", deleteIndex);
-    todoItems.splice(deleteIndex, 1);
+    // console.log("delete todo item", index);
+    todoItems.splice(index, 1);
     // console.log(todoItems);
     renderTodoItems();
     updateTotalCount();
@@ -56,7 +56,7 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
 
-  checkbox.addEventListener("change", function() {
+  checkbox.addEventListener("click", function() {
     // checkbox 要做的事情
     // 使 completed = true
     const todoItem = todoItems[index];
@@ -73,17 +73,11 @@ const generateTodoItem = (text, deleteIndex, editIndex) => {
 
   editButton.addEventListener("click", function() {
     // edit button 要做的事
-    console.log("edit", editIndex, text);
-    // 新增 input
-    // 代入 text
-    // 編輯按鈕消失
-    // 新增確認按鈕
-    // 取代 text
-    // 重新渲染
-    // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
-    // 新增取消按鈕
-    // 取消
-    // input, 確認按鈕, 取消按鈕 消失 & 編輯按鈕回來
+    // console.log("要編輯的項目", index, text);
+    // 使 edit = true
+    const todoItem = todoItems[index];
+    todoItem.edit = true;
+    renderTodoItems();
   });
 
   container.appendChild(checkbox);
@@ -113,14 +107,47 @@ const renderTodoItems = () => {
     // const text = todoItem.text; // 取出物件的值
     const { text } = todoItem; // destructing 取出物件的值
     // console.log(text);
-
-    const todoItemElement = generateTodoItem(text, i, i);
-    // console.log(todoItemElement);
-
+    const todoItemElement = generateTodoItem(text, i);
+    console.log(todoItemElement);
+    
     // 完成項目
     if (todoItem.completed) {
       todoItemElement.childNodes[1].classList.add("text-completed");
       todoItemElement.childNodes[0].setAttribute("checked", true);
+    }
+
+    // 編輯狀態
+    if (todoItem.edit) {
+      // 清空 todo item container
+      todoItemElement.innerHTML = "";
+      // todoItemElement.childNodes.forEach((item) => {
+      //   todoItemElement.removeChild(item);
+      // })
+      
+      const editInput = document.createElement("input");
+      editInput.value = text;
+
+      const editConfirmButton = document.createElement("button");
+      editConfirmButton.innerText = "確認";
+
+      const editCancelButton = document.createElement("button");
+      editCancelButton.innerText = "取消";
+
+      todoItemElement.appendChild(editInput);
+      todoItemElement.appendChild(editConfirmButton);
+      todoItemElement.appendChild(editCancelButton);
+
+      editConfirmButton.addEventListener("click", function() {
+        todoItem.text = editInput.value;
+        console.log(todoItems);
+        todoItem.edit = false;
+        renderTodoItems();
+      })
+
+      editCancelButton.addEventListener("click", function () {
+        todoItem.edit = false;
+        renderTodoItems();
+      });
     }
 
     itemContainer.appendChild(todoItemElement);
