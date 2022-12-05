@@ -4,7 +4,7 @@
 }
 
 body {
-  padding: 0px;
+  padding: 0;
   background: #02132b;
 }
 
@@ -12,6 +12,15 @@ body {
   width: 600px;
   margin: 0 auto; /* 置中 */
   padding-top: 100px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px;
+    padding-top: 20px;
+  }
 }
 
 .title-container,
@@ -39,7 +48,6 @@ body {
   height: 39px;
   width: 39px;
   font-size: 16px;
-  padding: 0;
   border: 2px solid #f0f0f0;
   color: #f0f0f0;
   border-radius: 8px;
@@ -70,6 +78,12 @@ body {
   border-radius: 8px;
 }
 
+@media (max-width: 600px) {
+  .item-container {
+    padding: 16px;
+  }
+}
+
 .todo-item-container {
   width: 100%;
   color: #f0f0f0;
@@ -83,6 +97,12 @@ body {
   gap: 12px;
 }
 
+@media (max-width: 600px) {
+  .todo-item-container {
+    padding: 4px 12px;
+  }
+}
+
 .todo-item-container:first-child {
   margin-top: 0;
 }
@@ -93,14 +113,16 @@ body {
   word-wrap: break-word;
 }
 
+@media (max-width: 600px) {
+  .todo-text-container {
+    width: 50%;
+  }
+}
+
 .delete-button {
   width: 32px;
   height: 32px;
   font-size: 16px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   color: rgb(255, 98, 98);
   border: 1px solid rgb(255, 98, 98);;
@@ -118,11 +140,12 @@ input[type="checkbox"] {
   width: 32px;
   height: 32px;
   border: 0;
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .text-completed {
-  color:#848484;
+  color:#909090;
   text-decoration: line-through;
 }
 
@@ -130,10 +153,6 @@ input[type="checkbox"] {
   width: 32px;
   height: 32px;
   font-size: 14px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   color: #f0f0f0;
   border: 1px solid #f0f0f0;
@@ -154,4 +173,10 @@ input[type="checkbox"] {
   padding-left: 16px;
   border-radius: 8px;
   border: 0;
+}
+
+@media (max-width: 600px) {
+  .edit-input {
+    width: 70%;
+  }
 }

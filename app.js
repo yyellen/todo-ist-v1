@@ -153,6 +153,7 @@ const renderTodoItems = () => {
       });
     }
 
+    
     itemContainer.appendChild(todoItemElement);
     updateCompletedCount();
   }
