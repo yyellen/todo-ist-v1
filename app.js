@@ -73,7 +73,7 @@ const generateTodoItem = (text, index) => {
 
   editButton.addEventListener("click", function() {
     // edit button 要做的事
-    console.log("要編輯的項目", index, text);
+    // console.log("要編輯的項目", index, text);
     // 使 edit = true
     const todoItem = todoItems[index];
     todoItem.edit = true;
@@ -108,7 +108,7 @@ const renderTodoItems = () => {
     const { text } = todoItem; // destructing 取出物件的值
     // console.log(text);
     const todoItemElement = generateTodoItem(text, i);
-    // console.log(todoItemElement);
+    console.log(todoItemElement);
     
     // 完成項目
     if (todoItem.completed) {
@@ -118,11 +118,11 @@ const renderTodoItems = () => {
 
     // 編輯狀態
     if (todoItem.edit) {
-      const TodoItemContainer = document.querySelector(".todo-item-container");
-      
       // 清空 todo item container
-      // Uncaught TypeError: Cannot set properties of null (setting 'innerHTML')
-      TodoItemContainer.innerHTML = "";
+      todoItemElement.innerHTML = "";
+      // todoItemElement.childNodes.forEach((item) => {
+      //   todoItemElement.removeChild(item);
+      // })
       
       const editInput = document.createElement("input");
       editInput.value = text;
@@ -133,10 +133,9 @@ const renderTodoItems = () => {
       const editCancelButton = document.createElement("button");
       editCancelButton.innerText = "取消";
 
-      // Error: Uncaught TypeError: Cannot read properties of null (reading 'appendChild')
-      TodoItemContainer.appendChild(editInput);
-      TodoItemContainer.appendChild(editConfirmButton);
-      TodoItemContainer.appendChild(editCancelButton);
+      todoItemElement.appendChild(editInput);
+      todoItemElement.appendChild(editConfirmButton);
+      todoItemElement.appendChild(editCancelButton);
 
       editConfirmButton.addEventListener("click", function() {
         todoItem.text = editInput.value;
@@ -145,8 +144,7 @@ const renderTodoItems = () => {
         renderTodoItems();
       })
 
-      // Error: Uncaught RangeError: Maximum call stack size exceeded
-      editConfirmButton.addEventListener("click", function () {
+      editCancelButton.addEventListener("click", function () {
         todoItem.edit = false;
         renderTodoItems();
       });
