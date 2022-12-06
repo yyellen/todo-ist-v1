@@ -1,3 +1,9 @@
+:root {
+  --theme-color: #02132b;
+  --text-color: #f0f0f0;
+  --danger: rgb(255, 98, 98);
+}
+
 * {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,22 +11,14 @@
 
 body {
   padding: 0;
-  background: #02132b;
+  background: var(--theme-color);
+  color: var(--text-color);
 }
 
 .container {
   width: 600px;
   margin: 0 auto; /* 置中 */
   padding-top: 100px;
-}
-
-@media (max-width: 600px) {
-  .container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 8px;
-    padding-top: 20px;
-  }
 }
 
 .title-container,
@@ -31,7 +29,7 @@ body {
 }
 
 .title {
-  color: #f0f0f0;
+  color: var(--text-color);
   font-size: 48px;
 }
 
@@ -48,21 +46,22 @@ body {
   height: 39px;
   width: 39px;
   font-size: 16px;
-  color: #f0f0f0;
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   background: transparent; /* 透明底色 */
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--text-color);
   border-radius: 8px;
   cursor: pointer;
   margin-left: 16px;
   transition: 0.3s;
 }
 
-.create-button:hover {
-  color: #02132b;
-  background: #f0f0f0;
+.create-button:hover,
+.edit-button:hover {
+  color: var(--theme-color);
+  background: var(--text-color);
 }
 
 .info-container {
@@ -70,27 +69,21 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #f0f0f0;
+  color: var(--text-color);
   font-size: 16px;
 }
 
 .item-container {
   margin-top: 32px;
   padding: 32px;
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--text-color);
   border-radius: 8px;
-}
-
-@media (max-width: 600px) {
-  .item-container {
-    padding: 16px;
-  }
 }
 
 .todo-item-container {
   width: 100%;
-  color: #f0f0f0;
-  border: 1px solid #f0f0f0;
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
   border-radius: 8px;
   margin-top: 20px;
   padding: 12px 20px;
@@ -98,12 +91,6 @@ body {
   align-items: center;
   justify-content: space-around;
   gap: 12px;
-}
-
-@media (max-width: 600px) {
-  .todo-item-container {
-    padding: 4px 12px;
-  }
 }
 
 .todo-item-container:first-child {
@@ -116,32 +103,6 @@ body {
   word-wrap: break-word;
 }
 
-@media (max-width: 600px) {
-  .todo-text-container {
-    width: 50%;
-  }
-}
-
-.delete-button {
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
-  color: rgb(255, 98, 98);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
-  border: 1px solid rgb(255, 98, 98);;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.delete-button:hover {
-  color: #f0f0f0;
-  background: rgb(255, 98, 98);
-}
-
 input[type="checkbox"] {
   width: 32px;
   height: 32px;
@@ -151,28 +112,36 @@ input[type="checkbox"] {
 }
 
 .text-completed {
-  color:#909090;
+  color: #909090;
   text-decoration: line-through;
 }
 
+.delete-button,
 .edit-button {
   width: 32px;
   height: 32px;
   font-size: 14px;
-  color: #f0f0f0;
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0;
   background: transparent;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--text-color);
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.edit-button:hover {
-  color: #02132b;
-  background: #f0f0f0;
+.delete-button {
+  color: var(--danger);
+  background: transparent;
+  border: 1px solid var(--danger);
+}
+
+.delete-button:hover {
+  color: var(--text-color);
+  background: var(--danger);
 }
 
 .edit-input {
@@ -184,8 +153,29 @@ input[type="checkbox"] {
   border: 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 620px) {
+  .container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px;
+    padding-top: 20px;
+  }
+  .todo-input {
+    padding-left: 8px;
+  }
+  .item-container {
+    padding: 16px;
+  }
+  .todo-item-container {
+    padding: 4px 12px;
+  }
+  .todo-text-container {
+    width: 50%;
+    margin: 0px;
+    padding: 0px;
+  }
   .edit-input {
-    width: 70%;
+    width: 68%;
+    padding-left: 8px;
   }
 }
