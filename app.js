@@ -191,7 +191,6 @@ Sortable.create(itemContainer, {
   onEnd(event) {
     // 複製暫存被拖曳的資料
     const tempTodo = todoItems[event.oldIndex];
-    console.log(event)
     // 刪除todo item被拖曳的位置
     todoItems.splice(event.oldIndex, 1);
     // 將暫存被拖曳的資料補回去新的拖曳位置
