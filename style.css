@@ -12,13 +12,21 @@
 body {
   padding: 0;
   background: var(--theme-color);
-  color: var(--text-color);
 }
 
 .container {
   width: 600px;
   margin: 0 auto; /* 置中 */
   padding-top: 100px;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .title-container,
@@ -47,19 +55,13 @@ body {
   width: 39px;
   font-size: 16px;
   color: var(--text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: transparent; /* 透明底色 */
   border: 2px solid var(--text-color);
   border-radius: 8px;
-  cursor: pointer;
   margin-left: 16px;
-  transition: 0.3s;
 }
 
-.create-button:hover,
-.edit-button:hover {
+.create-button:hover {
   color: var(--theme-color);
   background: var(--text-color);
 }
@@ -78,6 +80,7 @@ body {
   padding: 32px;
   border: 2px solid var(--text-color);
   border-radius: 8px;
+  color: var(--text-color);
 }
 
 .todo-item-container {
@@ -106,8 +109,6 @@ body {
 input[type="checkbox"] {
   width: 32px;
   height: 32px;
-  border: 0;
-  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -116,32 +117,34 @@ input[type="checkbox"] {
   text-decoration: line-through;
 }
 
-.delete-button,
-.edit-button {
+.delete-button {
   width: 32px;
   height: 32px;
   font-size: 14px;
-  color: var(--text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  background: transparent;
-  border: 1px solid var(--text-color);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.delete-button {
   color: var(--danger);
   background: transparent;
   border: 1px solid var(--danger);
+  border-radius: 50%;
 }
 
 .delete-button:hover {
   color: var(--text-color);
   background: var(--danger);
+}
+
+.edit-button {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  color: var(--text-color);
+  background: transparent;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+}
+
+.edit-button:hover {
+  color: var(--theme-color);
+  background: var(--text-color);
 }
 
 .edit-input {
@@ -162,17 +165,21 @@ input[type="checkbox"] {
   }
   .todo-input {
     padding-left: 8px;
+    /* font-size: 16px; */
   }
   .item-container {
     padding: 16px;
   }
   .todo-item-container {
     padding: 4px 12px;
+    margin-top: 12px;
+    gap: 8px;
   }
   .todo-text-container {
-    width: 50%;
+    width: 40%;
     margin: 0px;
     padding: 0px;
+    /* font-size: 16px; */
   }
   .edit-input {
     width: 68%;
