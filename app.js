@@ -74,6 +74,11 @@ const generateTodoItem = (text, index) => {
     renderTodoItems();
   });
 
+  // 新增 drag bar
+  const dragBar = document.createElement("span");
+  dragBar.innerHTML='<i class="fa-solid fa-bars"></i>';
+  
+  container.appendChild(dragBar);
   container.appendChild(checkbox);
   container.appendChild(itemContainer);
   container.appendChild(editButton);
@@ -103,8 +108,8 @@ const renderTodoItems = () => {
 
     // 完成項目
     if (todoItem.completed) {
-      todoItemElement.childNodes[1].classList.add('text-completed');
-      todoItemElement.childNodes[0].setAttribute('checked', true);
+      todoItemElement.childNodes[2].classList.add('text-completed');
+      todoItemElement.childNodes[1].setAttribute('checked', true);
     }
 
     // 編輯狀態
@@ -168,3 +173,29 @@ const updateCompletedCount = () => {
 };
 
 createButton.addEventListener('click', createTodoItem);
+
+// Sortable拖曳，參考文章: 
+// https://ithelp.ithome.com.tw/articles/10197718
+// https://github.com/SortableJS/Sortable
+Sortable.create(itemContainer, {
+  disabled: false, // 關閉Sortable
+  animation: 300,  // 物件移動時間(單位:毫秒)
+  handle: ".item-container",  // 可拖曳的區域
+  // filter: ".ignore",  // 過濾器，不能拖曳的物件
+  preventOnFilter: true, // 當過濾器啟動的時候，觸發event.preventDefault()
+  draggable: ".todo-item-container",  // 可拖曳的物件
+  ghostClass: "sortable-ghost",  // 拖曳時，給予物件的類別
+  chosenClass: "sortable-chosen",  // 選定時，給予物件的類別
+  forceFallback: false,  // 忽略HTML5 DnD
+  // 結束拖曳事件
+  onEnd(event) {
+    // 複製暫存被拖曳的資料
+    const tempTodo = todoItems[event.oldIndex];
+    console.log(event)
+    // 刪除todo item被拖曳的位置
+    todoItems.splice(event.oldIndex, 1);
+    // 將暫存被拖曳的資料補回去新的拖曳位置
+    todoItems.splice(event.newIndex, 0, tempTodo);
+    renderTodoItems();
+  }
+});
