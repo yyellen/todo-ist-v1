@@ -145,7 +145,6 @@ const renderTodoItems = () => {
       });
     }
 
-
     itemContainer.appendChild(todoItemElement);
     updateCompletedCount();
   }
@@ -173,6 +172,13 @@ const updateCompletedCount = () => {
 };
 
 createButton.addEventListener('click', createTodoItem);
+
+// 按下 Enter，新增 todo
+input.addEventListener('keyup', (e) => {
+  if (e.key === 'Enter') {
+    createTodoItem();
+  }
+})
 
 // Sortable拖曳，參考文章: 
 // https://ithelp.ithome.com.tw/articles/10197718
