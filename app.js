@@ -45,6 +45,7 @@ const generateTodoItem = (text, index) => {
     // alert(`確定要刪除${text}? 此動作無法恢復`);
     todoItems.splice(index, 1);
     renderTodoItems();
+    updateCompletedCount();
     updateTotalCount();
   });
 

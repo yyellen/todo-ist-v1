@@ -1,7 +1,8 @@
 :root {
-  --theme-color: #02132b;
+  --theme-color: #003060;
   --text-color: #f0f0f0;
   --danger: rgb(255, 98, 98);
+  --gray: #d9d9d9;
 }
 
 * {
@@ -114,7 +115,7 @@ input[type="checkbox"] {
 }
 
 .text-completed {
-  color: #909090;
+  color: var(--gray);
   text-decoration: line-through;
 }
 
